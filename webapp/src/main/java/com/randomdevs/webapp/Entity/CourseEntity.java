@@ -1,11 +1,14 @@
 package com.randomdevs.webapp.Entity;
 
+import java.util.List;
+import java.util.Set;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -15,31 +18,20 @@ public class CourseEntity {
 	//define data members
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int courseid;
+	private int id;
 	
 	private String coursecode;
 	private String coursename;
 	private String coursedescription;
 
 	private int unit;
-
-	@ManyToOne
-	@JoinColumn(name="id")
-	StudentEntity student;
 	
-	//define constructor
-	public CourseEntity() {}			
+	@OneToMany(cascade = CascadeType.MERGE)
+	private List<LessonEntity> lessons;
 
-	public CourseEntity(int courseid, String coursecode, String coursename, String coursedescription, int unit,
-			StudentEntity student) {
-		super();
-		this.courseid = courseid;
-		this.coursecode = coursecode;
-		this.coursename = coursename;
-		this.coursedescription = coursedescription;
-		this.unit = unit;
-		this.student = student;
-	}
+	//define constructor
+	public CourseEntity() {}	
+
 
 	@Override
 	public String toString() {
@@ -47,13 +39,28 @@ public class CourseEntity {
 	}
 	
 	//setters and getters
-	public int getCourseid() {
-		return courseid;
-	}
+
 
 	public String getCoursecode() {
 		return coursecode;
 	}
+
+	public CourseEntity(int id, String coursecode, String coursename, String coursedescription, int unit,
+			List<LessonEntity> lessons) {
+		super();
+		this.id = id;
+		this.coursecode = coursecode;
+		this.coursename = coursename;
+		this.coursedescription = coursedescription;
+		this.unit = unit;
+		this.lessons = lessons;
+	}
+
+
+	public int getId() {
+		return id;
+	}
+
 
 	public void setCoursecode(String coursecode) {
 		this.coursecode = coursecode;
@@ -82,12 +89,12 @@ public class CourseEntity {
 	public void setUnit(int unit) {
 		this.unit = unit;
 	}
-
-	public StudentEntity getStudent() {
-		return student;
+	
+	public List<LessonEntity> getLessons() {
+		return lessons;
 	}
 
-	public void setStudent(StudentEntity student) {
-		this.student = student;
-	}	
+	public void setLessons(List<LessonEntity> lessons) {
+		this.lessons = lessons;
+	}
 }
