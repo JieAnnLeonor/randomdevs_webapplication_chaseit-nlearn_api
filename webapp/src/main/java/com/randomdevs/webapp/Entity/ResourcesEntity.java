@@ -37,10 +37,6 @@ public class ResourcesEntity {
 		return r_id;
 	}
 
-	public void setR_id(int r_id) {
-		this.r_id = r_id;
-	}
-
 	public String getR_title() {
 		return r_title;
 	}
