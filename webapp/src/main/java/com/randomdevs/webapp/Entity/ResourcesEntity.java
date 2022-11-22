@@ -4,7 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -21,9 +23,13 @@ public class ResourcesEntity {
 	@Lob
 	private byte[] r_data;
 	
+	@ManyToOne
+	@JoinColumn(name="teacher_id", referencedColumnName="teacher_id")
+	TeacherEntity teacher;
+	
 	public ResourcesEntity() {}
 
-	public ResourcesEntity(int r_id, String r_title, String r_name, String r_type, String r_description, byte[] r_data) {
+	public ResourcesEntity(int r_id, String r_title, String r_name, String r_type, String r_description, byte[] r_data, TeacherEntity teacher) {
 		super();
 		this.r_id = r_id;
 		this.r_title = r_title;
@@ -31,6 +37,7 @@ public class ResourcesEntity {
 		this.r_type = r_type;
 		this.r_description = r_description;
 		this.r_data = r_data;
+		this.teacher = teacher;
 	}
 
 	public int getR_id() {
@@ -76,4 +83,13 @@ public class ResourcesEntity {
 	public void setR_data(byte[] r_data) {
 		this.r_data = r_data;
 	}
+
+	public TeacherEntity getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(TeacherEntity teacher) {
+		this.teacher = teacher;
+	}
+	
 }
