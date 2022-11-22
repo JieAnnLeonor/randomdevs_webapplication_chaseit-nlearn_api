@@ -10,12 +10,16 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.randomdevs.webapp.Entity.ResourcesEntity;
+import com.randomdevs.webapp.Entity.TeacherEntity;
 import com.randomdevs.webapp.Repository.ResourcesRepository;
+import com.randomdevs.webapp.Repository.TeacherRepository;
 
 @Service
 public class ResourcesService {
 	@Autowired
     private ResourcesRepository resrep;
+	@Autowired
+	private TeacherRepository teachrep;
 	//post
     public ResourcesEntity postResources(String r_title, String r_description, MultipartFile file) throws IOException {
         // Normalize file name
@@ -67,6 +71,29 @@ public class ResourcesService {
 			throw new Exception("ID Number " + id + " does not exist!");
 		}
     }
+    
+    //put
+    public ResourcesEntity assignTeacher(int res_id, int teach_id) throws Exception{
+    	ResourcesEntity res = new ResourcesEntity();
+    	TeacherEntity teach = new TeacherEntity();
+    	try {
+			//steps in updating
+			//1 - search the id number of the student
+			res = resrep.findById(res_id).get(); //findById is a pre-defined method
+			if(res.getTeacher()!=null)
+				throw new Exception("Teacher assigned");
+			else {
+			teach = teachrep.findById(teach_id).get();
+			//2 - if found then update the record
+			res.setTeacher(teach);
+			//3 - save the information and return the value -- refer to finally block
+			return resrep.save(res);
+			}
+		}catch(NoSuchElementException nex) {
+			throw new Exception("ID Number " + res_id + " does not exist");
+		}
+    }
+    
     //delete
     public String deleteResources(int id) throws Exception{
     	String msg;
