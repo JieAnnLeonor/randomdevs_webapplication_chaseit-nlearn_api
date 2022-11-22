@@ -102,3 +102,9 @@ local.properties
 .sts4-cache/
 
 # End of https://www.toptal.com/developers/gitignore/api/eclipse
+
+mvnw
+mvnw.cmd
+maven-wrapper.jar
+maven-wrapper.properties
+application.properties
