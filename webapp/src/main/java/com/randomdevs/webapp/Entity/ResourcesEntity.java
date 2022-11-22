@@ -24,7 +24,7 @@ public class ResourcesEntity {
 	private byte[] r_data;
 	
 	@ManyToOne
-	@JoinColumn(name="teacher_id", referencedColumnName="teacher_id")
+	@JoinColumn(name="teacher_id", referencedColumnName="id")
 	TeacherEntity teacher;
 	
 	public ResourcesEntity() {}

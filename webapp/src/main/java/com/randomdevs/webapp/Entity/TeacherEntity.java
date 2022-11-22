@@ -28,7 +28,7 @@ public class TeacherEntity {
 	private Set<CourseEntity> course;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy="teacherRes", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="teacher", cascade = CascadeType.ALL)
 	Set<ResourcesEntity> resources;
 	
 	//constructor
