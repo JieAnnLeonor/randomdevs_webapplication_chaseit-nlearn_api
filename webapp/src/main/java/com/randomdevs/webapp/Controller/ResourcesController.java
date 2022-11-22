@@ -47,6 +47,11 @@ public class ResourcesController {
     	return resserv.putResources(r_id, res);
     }
     
+    @PutMapping("/{r_id}/teacher/{teacher_id}")
+    public ResourcesEntity assignTeacher(@PathVariable int r_id, @PathVariable int teacher_id) throws Exception {
+    	return resserv.assignTeacher(r_id, teacher_id);
+    }
+    
     @DeleteMapping("/deleteResources/{r_id}")
     public String deleteResources(@PathVariable int r_id) throws Exception {
 		return resserv.deleteResources(r_id);

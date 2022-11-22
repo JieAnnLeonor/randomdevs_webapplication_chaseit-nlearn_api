@@ -78,7 +78,7 @@ public class ResourcesService {
     	TeacherEntity teach = new TeacherEntity();
     	try {
 			//steps in updating
-			//1 - search the id number of the student
+			//1 - search the id number of the teacher
 			res = resrep.findById(res_id).get(); //findById is a pre-defined method
 			if(res.getTeacher()!=null)
 				throw new Exception("Teacher assigned");
