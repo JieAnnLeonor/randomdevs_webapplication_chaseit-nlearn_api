@@ -4,10 +4,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.randomdevs.webapp.Entity.LessonEntity;
 import com.randomdevs.webapp.Repository.LessonRepository;
 
+@Service
 public class LessonService {
 	/*this class contains all the business logic of your systems
 	 * Create a student record
