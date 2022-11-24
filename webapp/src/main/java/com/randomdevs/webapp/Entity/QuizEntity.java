@@ -8,8 +8,6 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.CascadeType;
 
-import com.randomdevs.webapp.Entity.Question.QuestionEntity;
-
 import java.util.Set;
 
 @Entity
