@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,8 +27,16 @@ public class TeacherEntity {
 	private String middlename;
 	private String contact;
 	
-	@OneToMany(cascade = CascadeType.MERGE)
-	private Set<CourseEntity> course;
+	//@OneToMany(cascade = CascadeType.MERGE)
+	//private Set<CourseEntity> course;
+	
+	@ManyToMany
+	@JoinTable(
+			name="teacher_course", 
+			joinColumns = @JoinColumn(name = "teacher_id"),
+			inverseJoinColumns = @JoinColumn(name = "course_id")
+			)
+	Set<CourseEntity> t_course;
 	
 	@JsonIgnore
 	@OneToMany(mappedBy="teacher", cascade = CascadeType.ALL)
@@ -35,14 +46,14 @@ public class TeacherEntity {
 	public TeacherEntity() {}
 
 	public TeacherEntity(int id, String firstname, String lastname, String middlename, String contact,
-			Set<CourseEntity> course, Set<ResourcesEntity> resources) {
+			Set<CourseEntity> t_course, Set<ResourcesEntity> resources) {
 		super();
 		this.id = id;
 		this.firstname = firstname;
 		this.lastname = lastname;
 		this.middlename = middlename;
 		this.contact = contact;
-		this.course = course;
+		this.t_course = t_course;
 		this.resources = resources;
 	}
 
@@ -71,11 +82,11 @@ public class TeacherEntity {
 	}
 
 	public Set<CourseEntity> getCourse() {
-		return course;
+		return t_course;
 	}
 
-	public void setCourse(Set<CourseEntity> course) {
-		this.course = course;
+	public void setCourse(Set<CourseEntity> t_course) {
+		this.t_course = t_course;
 	}
 
 	public Set<ResourcesEntity> getResources() {
